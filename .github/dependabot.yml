@@ -38,3 +38,7 @@ updates:
     babel:
       patterns:
         - "@babel/*"
+    jasmine:
+      patterns:
+        - "jasmine"
+        - "jasmine-core"
