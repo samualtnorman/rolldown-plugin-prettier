@@ -31,7 +31,7 @@ import { verifyWarnLogsBecauseOfSourcemap } from '../utils/verify-warn-logs-beca
 import { verifyWarnLogsNotTriggered } from '../utils/verify-warn-logs-not-triggered';
 import { joinLines } from '../utils/join-lines';
 
-describe('rollup-plugin-prettier', () => {
+describe('[it] rollup-plugin-prettier', () => {
   let tmpDir;
 
   beforeEach(() => {
