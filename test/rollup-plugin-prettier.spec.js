@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import path from 'path';
+import path from 'node:path';
 import { RollupPluginPrettier } from '../src/rollup-plugin-prettier';
 import { verifyWarnLogsBecauseOfSourcemap } from './utils/verify-warn-logs-because-of-source-map';
 import { verifyWarnLogsNotTriggered } from './utils/verify-warn-logs-not-triggered';

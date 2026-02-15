@@ -15,7 +15,7 @@ Install the plugin with NPM:
 Then add it to your rollup configuration:
 
 ```javascript
-const path = require('path');
+const path = require('node:path');
 const prettier = require('rollup-plugin-prettier');
 
 module.exports = {
@@ -58,7 +58,7 @@ Note that this may take some time since `prettier` package is not able to genera
 Here is an example:
 
 ```javascript
-const path = require('path');
+const path = require('node:path');
 const prettier = require('rollup-plugin-prettier');
 
 module.exports = {

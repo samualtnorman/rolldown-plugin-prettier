@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import path from 'path';
+import path from 'node:path';
 import hasIn from 'lodash.hasin';
 import isEmpty from 'lodash.isempty';
 import isNil from 'lodash.isnil';

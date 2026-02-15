@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import fs from 'fs/promises';
-import path from 'path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 import tmp from 'tmp';
 import * as rollup from 'rollup';
 import prettier from '../../src/index';
