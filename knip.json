@@ -3,5 +3,8 @@
 		"rolldown.config.js",
 		"src/**/*.[jt]s",
 		"scripts/*"
+	],
+	"ignoreDependencies": [
+		"eslint-plugin-you-dont-need-lodash-underscore"
 	]
 }

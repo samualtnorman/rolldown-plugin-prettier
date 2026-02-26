@@ -22,22 +22,27 @@
   ],
   "dependencies": {
     "diff": "^8",
-    "lodash.hasin": "^4",
-    "lodash.isempty": "^4",
-    "lodash.isnil": "^4",
-    "lodash.omitby": "^4",
     "magic-string": "0.30.21",
     "prettier": "^3",
     "rolldown": "1.0.0-rc.6"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.4",
+    "@eslint/js": "^10.0.1",
+    "@samual/assert": "0.0.1-da0fbad",
     "@samual/rolldown-config": "0.0.1-0b5b63c",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/node": "~20.10",
     "@types/semver": "^7.7.1",
+    "es-toolkit": "^1.44.0",
+    "eslint": "^10.0.2",
+    "eslint-plugin-depend": "^1.4.0",
+    "eslint-plugin-n": "^17.24.0",
+    "eslint-plugin-you-dont-need-lodash-underscore": "^6.14.0",
     "knip": "^5.85.0",
     "semver": "^7.7.4",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.56.1"
   },
   "engines": {
     "node": "^20.10 || ^22 || >=24",
