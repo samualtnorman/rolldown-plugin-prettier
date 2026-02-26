@@ -1,0 +1,7 @@
+{
+	"entry": [
+		"rolldown.config.js",
+		"src/**/*.[jt]s",
+		"scripts/*"
+	]
+}

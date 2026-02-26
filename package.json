@@ -1,72 +1,47 @@
 {
-  "name": "rollup-plugin-prettier",
-  "version": "4.1.2",
-  "description": "Run prettier formatter with rollup",
-  "main": "dist/index.js",
+  "name": "@samual/rolldown-plugin-prettier",
+  "version": "0.0.0",
+  "description": "Rolldown plugin for code formatting using Prettier",
   "author": "Mickael Jeanroy <mickael.jeanroy@gmail.com>",
+  "contributors": [
+    "@pastelmind (https://github.com/pastelmind)",
+    "Samual Norman <me@samual.uk> (https://samual.uk/)"
+  ],
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:mjeanroy/rollup-plugin-prettier.git"
+  "homepage": "https://github.com/samualtnorman/rolldown-plugin-prettier#readme",
+  "bugs": {
+    "url": "https://github.com/samualtnorman/rolldown-plugin-prettier/issues",
+    "email": "me@samual.uk"
   },
-  "types": "dist/index.d.ts",
-  "scripts": {
-    "clean": "gulp clean",
-    "lint": "gulp lint",
-    "build": "gulp build",
-    "tdd": "gulp tdd",
-    "test": "gulp test",
-    "release": "gulp release:minor",
-    "release:patch": "gulp release:patch",
-    "release:minor": "gulp release:minor",
-    "release:major": "gulp release:major",
-    "changelog": "gulp changelog"
-  },
+  "repository": "github:samualtnorman/rolldown-plugin-config",
   "keywords": [
-    "rollup",
-    "rollup-plugin",
+    "rolldown",
+    "rolldown-plugin",
+    "plugin",
     "prettier"
   ],
-  "peerDependencies": {
-    "prettier": "^1.0.0 || ^2.0.0 || ^3.0.0",
-    "rollup": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0"
-  },
   "dependencies": {
-    "diff": "8.0.3",
-    "lodash.hasin": "4.5.2",
-    "lodash.isempty": "4.4.0",
-    "lodash.isnil": "4.0.0",
-    "lodash.omitby": "4.6.0",
-    "magic-string": "0.30.21"
+    "diff": "^8",
+    "lodash.hasin": "^4",
+    "lodash.isempty": "^4",
+    "lodash.isnil": "^4",
+    "lodash.omitby": "^4",
+    "magic-string": "0.30.21",
+    "prettier": "^3",
+    "rolldown": "1.0.0-rc.6"
   },
   "devDependencies": {
-    "@babel/core": "7.29.0",
-    "@babel/parser": "7.29.0",
-    "@babel/preset-env": "7.29.0",
-    "@babel/register": "7.28.6",
-    "@rollup/plugin-babel": "6.1.0",
-    "@typescript-eslint/eslint-plugin": "8.56.1",
-    "@typescript-eslint/parser": "8.56.1",
-    "ansi-colors": "4.1.3",
-    "babel-plugin-add-module-exports": "1.0.4",
-    "eslint": "8.57.0",
-    "eslint-config-airbnb-base": "15.0.0",
-    "eslint-plugin-import": "2.32.0",
-    "fancy-log": "2.0.0",
-    "globalthis": "1.0.4",
-    "gulp": "5.0.1",
-    "gulp-conventional-changelog": "5.0.0",
-    "jasmine": "6.1.0",
-    "jasmine-core": "6.1.0",
-    "lodash.startswith": "4.2.1",
-    "prettier": "3.8.1",
-    "rimraf": "6.1.3",
-    "rollup": "4.59.0",
-    "rollup-plugin-strip-banner": "3.1.0",
-    "tmp": "0.2.5",
+    "@samual/rolldown-config": "0.0.1-0b5b63c",
+    "@total-typescript/ts-reset": "^0.6.1",
+    "@types/node": "~20.10",
+    "@types/semver": "^7.7.1",
+    "knip": "^5.85.0",
+    "semver": "^7.7.4",
     "typescript": "5.9.3"
   },
   "engines": {
-    "node": ">=6.0.0"
-  }
+    "node": "^20.10 || ^22 || >=24",
+    "pnpm": "^10"
+  },
+  "type": "module"
 }
