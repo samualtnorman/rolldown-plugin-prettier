@@ -26,4 +26,4 @@ declare namespace prettier {
 
 declare function prettier(options?: prettier.Options): Plugin;
 
-export = prettier;
+export default prettier;
