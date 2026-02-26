@@ -1,5 +1,5 @@
 {
-	"include": [ "*", "scripts/**/*" ],
+	"include": [ "*", "scripts/**/*", "src/index.d.ts" ],
 	"compilerOptions": {
 		"noEmit": true,
 		"lib": [ "es2022" ],
