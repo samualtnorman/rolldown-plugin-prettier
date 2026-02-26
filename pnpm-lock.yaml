@@ -13,6 +13,9 @@ importers:
 
   .:
     dependencies:
+      '@samual/assert':
+        specifier: 0.0.1-da0fbad
+        version: 0.0.1-da0fbad
       diff:
         specifier: ^8
         version: 8.0.0
@@ -32,9 +35,6 @@ importers:
       '@eslint/js':
         specifier: ^10.0.1
         version: 10.0.1(eslint@10.0.2(jiti@2.6.1))
-      '@samual/assert':
-        specifier: 0.0.1-da0fbad
-        version: 0.0.1-da0fbad
       '@samual/rolldown-config':
         specifier: 0.0.1-0b5b63c
         version: 0.0.1-0b5b63c(@types/babel__core@7.20.5)(prettier@3.0.0)(rollup@4.59.0)

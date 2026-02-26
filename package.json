@@ -21,6 +21,7 @@
     "prettier"
   ],
   "dependencies": {
+    "@samual/assert": "0.0.1-da0fbad",
     "diff": "^8",
     "magic-string": "0.30.21",
     "prettier": "^3",
@@ -29,7 +30,6 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.4",
     "@eslint/js": "^10.0.1",
-    "@samual/assert": "0.0.1-da0fbad",
     "@samual/rolldown-config": "0.0.1-0b5b63c",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/node": "~20.10",

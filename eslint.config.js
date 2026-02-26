@@ -24,10 +24,15 @@ export default defineConfig(
 			"n/hashbang": "off",
 			"n/no-process-exit": "off",
 			"@typescript-eslint/no-unused-vars": "off",
-			"@typescript-eslint/no-namespace": [ "error", { allowDeclarations: true } ]
-		},
-		settings: {
-			n: { tryExtensions: [ `.ts` ] }
 		}
+	},
+	{
+		basePath: `src`,
+		rules: {
+			"n/no-unpublished-import": [ "error", { allowModules: [ "es-toolkit" ] } ],
+			"@typescript-eslint/no-namespace": [ "error", { allowDeclarations: true } ],
+			"n/no-missing-import": "off"
+		},
+		settings: { n: { tryExtensions: [ `.ts` ] } }
 	}
 )
