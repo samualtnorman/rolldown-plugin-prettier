@@ -10,6 +10,7 @@
 		"target": "ES2022",
 		"isolatedDeclarations": true,
 		"declaration": true,
+		"isolatedModules": true,
 		"checkJs": false
 	}
 }
