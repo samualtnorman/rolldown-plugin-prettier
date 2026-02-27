@@ -29,7 +29,7 @@ declare namespace rollupPluginPrettier {
  * @param options Plugin options.
  * @return Plugin instance.
  */
-export default function rollupPluginPrettier(options: Options): Plugin {
+function rollupPluginPrettier(options: Options): Plugin {
   const plugin = new RollupPluginPrettier(options)
 
   return {
@@ -54,3 +54,5 @@ export default function rollupPluginPrettier(options: Options): Plugin {
     }
   }
 }
+
+export { rollupPluginPrettier as default }
