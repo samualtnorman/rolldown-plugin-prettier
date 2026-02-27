@@ -42,7 +42,7 @@ function resolvePrettierConfig(cwd: string): Promise<object | null> {
 export class RollupPluginPrettier {
   declare name: string
   _options: Promise<Partial<Options> | undefined>
-  _sourcemap
+  _sourcemap: boolean | `silent` | null
   /**
    * Initialize plugin & prettier.
    *
@@ -74,14 +74,14 @@ export class RollupPluginPrettier {
    *
    * @return The `sourcemap` flag value.
    */
-  getSourcemap() {
+  getSourcemap(): boolean | "silent" | null {
     return this._sourcemap;
   }
 
   /**
    * Disable sourcemap.
    */
-  enableSourcemap() {
+  enableSourcemap(): void {
     this._sourcemap = true;
   }
 

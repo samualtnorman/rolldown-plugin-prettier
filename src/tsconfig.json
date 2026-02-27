@@ -8,7 +8,8 @@
 		"useUnknownInCatchVariables": true,
 		"strictNullChecks": true,
 		"target": "ES2022",
-		// "isolatedDeclarations": true,
+		"isolatedDeclarations": true,
+		"declaration": true,
 		"checkJs": false
 	}
 }
