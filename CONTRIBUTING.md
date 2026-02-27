@@ -16,5 +16,5 @@ Run `./rolldown.config.js`.
 Run `scripts/npm.sh`.
 
 ## Testing
-In a different project you can run `pnpm add ~/path/to/rolldown-plugin-prettier/dist` to install the locally built version
-of this package so you can run the Rolldown plugin like you normally would any other Rolldown plugin.
+In a different project you can run `pnpm add ~/path/to/rolldown-plugin-prettier/dist` to install the locally built
+version of this package so you can run the Rolldown plugin like you normally would any other Rolldown plugin.
