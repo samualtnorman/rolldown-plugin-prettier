@@ -162,4 +162,4 @@ export class RollupPluginPrettier {
   }
 }
 
-assert(Reflect.defineProperty(RollupPluginPrettier, `name`, { value: `rolldown-plugin-prettier` }))
+assert(Reflect.defineProperty(RollupPluginPrettier.prototype, `name`, { value: `rolldown-plugin-prettier` }))
