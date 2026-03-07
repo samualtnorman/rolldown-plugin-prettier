@@ -45,7 +45,6 @@ function resolvePrettierConfig(cwd: string): Promise<object | null> {
  */
 export async function reformat(options: Options, source: string, outputOptions?: { sourcemap: boolean }): Promise<{ code: string, map?: SourceMapInput }> {
 	let _options: Promise<Partial<Options> | undefined>
-	let _sourcemap: boolean | `silent` | null
 
 	// Initialize main options.
 	_options = Promise.resolve(
@@ -63,16 +62,13 @@ export async function reformat(options: Options, source: string, outputOptions?:
 		isEmpty(opts) ? undefined : opts
 	));
 
-	// Check if sourcemap is enabled by default.
-	_sourcemap = "sourcemap" in options ? options.sourcemap : null;
-
 	const sourcemap = outputOptions?.sourcemap
 	const output = await prettier.format(source, await _options)
 
 	// Should we generate sourcemap?
 	// The sourcemap option may be a boolean or any truthy value (such as a `string`).
 	// Note that this option should be false by default as it may take a (very) long time.
-	const defaultSourcemap = _sourcemap == null ? false : _sourcemap;
+	const defaultSourcemap = options.sourcemap ?? false;
 	const outputSourcemap = sourcemap == null ? defaultSourcemap : sourcemap;
 	if (!outputSourcemap) {
 		return { code: output };
