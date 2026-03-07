@@ -66,7 +66,6 @@ export async function reformat(options: Options, source: string, outputOptions?:
 	// Check if sourcemap is enabled by default.
 	_sourcemap = "sourcemap" in options ? options.sourcemap : null;
 
-
 	/**
 	 * Reformat source code using prettier.
 	 *
