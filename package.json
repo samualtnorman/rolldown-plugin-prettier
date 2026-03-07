@@ -30,7 +30,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.4",
     "@eslint/js": "^10.0.1",
-    "@samual/rolldown-config": "0.0.1-0b5b63c",
+    "@samual/rolldown-config": "0.0.1-25d57ad",
     "@total-typescript/ts-reset": "^0.6.1",
     "@types/node": "~20.10",
     "@types/semver": "^7.7.1",
