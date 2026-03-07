@@ -52,8 +52,7 @@ export async function reformat(options: Options, source: string, outputOptions?:
 	);
 
 	// Try to resolve config file if it exists
-	const cwd = "cwd" in options ? options.cwd : process.cwd();
-	_options = Promise.all([resolvePrettierConfig(cwd), _options]).then((results) => (
+	_options = Promise.all([resolvePrettierConfig(options.cwd ?? process.cwd()), _options]).then((results) => (
 		Object.assign({}, ...results.map((result) => result || {}))
 	));
 
