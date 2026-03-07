@@ -44,25 +44,20 @@ function resolvePrettierConfig(cwd: string): Promise<object | null> {
  * @return The transformation result.
  */
 export async function reformat(options: Options, source: string, outputOptions?: { sourcemap: boolean }): Promise<{ code: string, map?: SourceMapInput }> {
-	let _options: Promise<Partial<Options> | undefined>
-
-	// Initialize main options.
-	_options = Promise.resolve(
-		omitBy((options), (_value, key) => OPTIONS.has(key)),
-	);
-
-	// Try to resolve config file if it exists
-	_options = Promise.all([resolvePrettierConfig(options.cwd ?? process.cwd()), _options]).then((results) => (
-		Object.assign({}, ...results.map((result) => result || {}))
-	));
-
-	// Reset empty options.
-	_options = _options.then((opts) => (
-		isEmpty(opts) ? undefined : opts
-	));
-
 	const sourcemap = outputOptions?.sourcemap
-	const output = await prettier.format(source, await _options)
+	const output = await prettier.format(
+		source,
+		await Promise.all([
+			resolvePrettierConfig(options.cwd ?? process.cwd()),
+			Promise.resolve(
+				omitBy((options), (_value, key) => OPTIONS.has(key)),
+			)
+		]).then((results) => (
+			Object.assign({}, ...results.map((result) => result || {}))
+		)).then((opts) => (
+			isEmpty(opts) ? undefined : opts
+		))
+	)
 
 	// Should we generate sourcemap?
 	// The sourcemap option may be a boolean or any truthy value (such as a `string`).
