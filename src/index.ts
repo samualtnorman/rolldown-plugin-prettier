@@ -1,4 +1,4 @@
-import { RollupPluginPrettier } from "./rollup-plugin-prettier"
+import { NAME, reformat } from "./rollup-plugin-prettier"
 import type { Plugin } from "rolldown"
 import type { Options as PrettierOptions } from "prettier"
 
@@ -30,14 +30,12 @@ declare namespace rollupPluginPrettier {
  * @return Plugin instance.
  */
 function rollupPluginPrettier(options: Options): Plugin {
-	const plugin = new RollupPluginPrettier(options)
-
 	return {
 		/**
 		 * Plugin name (used by rollup for error messages and warnings).
 		 * @type {string}
 		 */
-		name: plugin.name,
+		name: NAME,
 
 		/**
 		 * Function called by `rollup` before generating final bundle.
@@ -48,7 +46,7 @@ function rollupPluginPrettier(options: Options): Plugin {
 		 * @return The result containing a `code` property and, if a enabled, a `map` property.
 		 */
 		renderChunk(source, _chunkInfo, outputOptions) {
-			return plugin.reformat(source, {
+			return reformat(options, source, {
 				sourcemap: Boolean(outputOptions.sourcemap)
 			})
 		}

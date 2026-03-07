@@ -1,4 +1,3 @@
-import { assert } from "@samual/assert"
 import * as diff from "diff"
 import { isEmpty, omitBy } from "es-toolkit/compat"
 import MagicString from "magic-string"
@@ -6,6 +5,8 @@ import path from "node:path"
 import prettier from "prettier"
 import type { SourceMapInput } from "rolldown"
 import type { Options } from "."
+
+export const NAME = `rolldown-plugin-prettier`
 
 /**
  * The plugin options that are currently supported.
@@ -35,66 +36,36 @@ function resolvePrettierConfig(cwd: string): Promise<object | null> {
 }
 
 /**
- * The plugin.
+ * Reformat source code using prettier.
  *
- * @class
+ * @param options Initalization option.
+ * @param source The source code to reformat.
+ * @param outputOptions Output options.
+ * @return The transformation result.
  */
-export class RollupPluginPrettier {
-	declare name: string
-	_options: Promise<Partial<Options> | undefined>
-	_sourcemap: boolean | `silent` | null
-	/**
-	 * Initialize plugin & prettier.
-	 *
-	 * @param options Initalization option.
-	 */
-	constructor(options: Options = {}) {
-		// Initialize main options.
-		this._options = Promise.resolve(
-			omitBy((options), (_value, key) => OPTIONS.has(key)),
-		);
+export async function reformat(options: Options, source: string, outputOptions?: { sourcemap: boolean }): Promise<{ code: string, map?: SourceMapInput }> {
+	let _options: Promise<Partial<Options> | undefined>
+	let _sourcemap: boolean | `silent` | null
 
-		// Try to resolve config file if it exists
-		const cwd = "cwd" in options ? options.cwd : process.cwd();
-		this._options = Promise.all([resolvePrettierConfig(cwd), this._options]).then((results) => (
-			Object.assign({}, ...results.map((result) => result || {}))
-		));
+	// Initialize main options.
+	_options = Promise.resolve(
+		omitBy((options), (_value, key) => OPTIONS.has(key)),
+	);
 
-		// Reset empty options.
-		this._options = this._options.then((opts) => (
-			isEmpty(opts) ? undefined : opts
-		));
+	// Try to resolve config file if it exists
+	const cwd = "cwd" in options ? options.cwd : process.cwd();
+	_options = Promise.all([resolvePrettierConfig(cwd), _options]).then((results) => (
+		Object.assign({}, ...results.map((result) => result || {}))
+	));
 
-		// Check if sourcemap is enabled by default.
-		this._sourcemap = "sourcemap" in options ? options.sourcemap : null;
-	}
+	// Reset empty options.
+	_options = _options.then((opts) => (
+		isEmpty(opts) ? undefined : opts
+	));
 
-	/**
-	 * Get the `sourcemap` value.
-	 *
-	 * @return The `sourcemap` flag value.
-	 */
-	getSourcemap(): boolean | "silent" | null {
-		return this._sourcemap;
-	}
+	// Check if sourcemap is enabled by default.
+	_sourcemap = "sourcemap" in options ? options.sourcemap : null;
 
-	/**
-	 * Disable sourcemap.
-	 */
-	enableSourcemap(): void {
-		this._sourcemap = true;
-	}
-
-	/**
-	 * Reformat source code using prettier.
-	 *
-	 * @param source The source code to reformat.
-	 * @param outputOptions Output options.
-	 * @return The transformation result.
-	 */
-	async reformat(source: string, outputOptions?: { sourcemap: boolean }): Promise<{ code: string, map?: SourceMapInput }> {
-		return this._reformat(source, outputOptions, await this._options)
-	}
 
 	/**
 	 * Reformat source code using prettier.
@@ -105,8 +76,8 @@ export class RollupPluginPrettier {
 	 * @returns The reformat response.
 	 * @private
 	 */
-	async _reformat(source: string, outputOptions?: { sourcemap: boolean }, options?: object): Promise<{ code: string, map?: SourceMapInput }> {
-		return this._processOutput(source, outputOptions?.sourcemap, await prettier.format(source, options))
+	async function _reformat(source: string, outputOptions?: { sourcemap: boolean }, options?: object): Promise<{ code: string, map?: SourceMapInput }> {
+		return _processOutput(source, outputOptions?.sourcemap, await prettier.format(source, options))
 	}
 
 	/**
@@ -120,19 +91,19 @@ export class RollupPluginPrettier {
 	 * @returns The reformat response.
 	 * @private
 	 */
-	_processOutput(source: string, sourcemap: boolean | undefined | null, output: string): { code: string, map?: SourceMapInput } {
+	function _processOutput(source: string, sourcemap: boolean | undefined | null, output: string): { code: string, map?: SourceMapInput } {
 		// Should we generate sourcemap?
 		// The sourcemap option may be a boolean or any truthy value (such as a `string`).
 		// Note that this option should be false by default as it may take a (very) long time.
-		const defaultSourcemap = this._sourcemap == null ? false : this._sourcemap;
+		const defaultSourcemap = _sourcemap == null ? false : _sourcemap;
 		const outputSourcemap = sourcemap == null ? defaultSourcemap : sourcemap;
 		if (!outputSourcemap) {
 			return { code: output };
 		}
 
 		if (defaultSourcemap !== 'silent') {
-			console.warn(`[${this.name}] Sourcemap is enabled, computing diff is required`);
-			console.warn(`[${this.name}] This may take a moment (depends on the size of your bundle)`);
+			console.warn(`[${NAME}] Sourcemap is enabled, computing diff is required`);
+			console.warn(`[${NAME}] This may take a moment (depends on the size of your bundle)`);
 		}
 
 		const magicString = new MagicString(source);
@@ -160,6 +131,6 @@ export class RollupPluginPrettier {
 			}),
 		};
 	}
-}
 
-assert(Reflect.defineProperty(RollupPluginPrettier.prototype, `name`, { value: `rolldown-plugin-prettier` }))
+	return _reformat(source, outputOptions, await _options)
+}
