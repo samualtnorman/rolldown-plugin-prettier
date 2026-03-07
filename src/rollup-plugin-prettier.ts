@@ -66,58 +66,45 @@ export async function reformat(options: Options, source: string, outputOptions?:
 	// Check if sourcemap is enabled by default.
 	_sourcemap = "sourcemap" in options ? options.sourcemap : null;
 
-	/**
-	 * Reformat source code using prettier.
-	 *
-	 * @param source The source code to reformat.
-	 * @param outputOptions Output options.
-	 * @param options Prettier options.
-	 * @returns The reformat response.
-	 * @private
-	 */
-	async function _reformat(source: string, outputOptions?: { sourcemap: boolean }, options?: object): Promise<{ code: string, map?: SourceMapInput }> {
-		const sourcemap = outputOptions?.sourcemap
-		const output = await prettier.format(source, options)
+	const sourcemap = outputOptions?.sourcemap
+	const output = await prettier.format(source, await _options)
 
-		// Should we generate sourcemap?
-		// The sourcemap option may be a boolean or any truthy value (such as a `string`).
-		// Note that this option should be false by default as it may take a (very) long time.
-		const defaultSourcemap = _sourcemap == null ? false : _sourcemap;
-		const outputSourcemap = sourcemap == null ? defaultSourcemap : sourcemap;
-		if (!outputSourcemap) {
-			return { code: output };
-		}
-
-		if (defaultSourcemap !== 'silent') {
-			console.warn(`[${NAME}] Sourcemap is enabled, computing diff is required`);
-			console.warn(`[${NAME}] This may take a moment (depends on the size of your bundle)`);
-		}
-
-		const magicString = new MagicString(source);
-		const changes = diff.diffChars(source, output);
-
-		if (changes && changes.length > 0) {
-			let idx = 0;
-
-			changes.forEach((part) => {
-				if (part.added) {
-					magicString.prependLeft(idx, part.value);
-					idx -= part.count;
-				} else if (part.removed) {
-					magicString.remove(idx, idx + part.count);
-				}
-
-				idx += part.count;
-			});
-		}
-
-		return {
-			code: magicString.toString(),
-			map: magicString.generateMap({
-				hires: true,
-			}),
-		};
+	// Should we generate sourcemap?
+	// The sourcemap option may be a boolean or any truthy value (such as a `string`).
+	// Note that this option should be false by default as it may take a (very) long time.
+	const defaultSourcemap = _sourcemap == null ? false : _sourcemap;
+	const outputSourcemap = sourcemap == null ? defaultSourcemap : sourcemap;
+	if (!outputSourcemap) {
+		return { code: output };
 	}
 
-	return _reformat(source, outputOptions, await _options)
+	if (defaultSourcemap !== 'silent') {
+		console.warn(`[${NAME}] Sourcemap is enabled, computing diff is required`);
+		console.warn(`[${NAME}] This may take a moment (depends on the size of your bundle)`);
+	}
+
+	const magicString = new MagicString(source);
+	const changes = diff.diffChars(source, output);
+
+	if (changes && changes.length > 0) {
+		let idx = 0;
+
+		changes.forEach((part) => {
+			if (part.added) {
+				magicString.prependLeft(idx, part.value);
+				idx -= part.count;
+			} else if (part.removed) {
+				magicString.remove(idx, idx + part.count);
+			}
+
+			idx += part.count;
+		});
+	}
+
+	return {
+		code: magicString.toString(),
+		map: magicString.generateMap({
+			hires: true,
+		}),
+	};
 }
