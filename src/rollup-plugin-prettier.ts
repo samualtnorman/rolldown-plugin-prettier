@@ -8,25 +8,6 @@ import type { Options } from "."
 export const NAME = `rolldown-plugin-prettier`
 
 /**
- * Resolve prettier config, using `resolveConfig` by default, switch to `resolveConfigSync` otherwise.
- * If none of these methods are available, returns `null` as a fallback.
- *
- * @param cwd The current working directory.
- * @returns A promise resolved with prettier configuration, or null.
- */
-function resolvePrettierConfig(cwd: string): Promise<object | null> {
-	// Since prettier 3.1.1, the resolver searches from a file path, not a directory.
-	// Let's fake it by concatenating with a file name.
-	const fromFile = path.join(cwd, '__noop__.js');
-
-	if (prettier.resolveConfig) {
-		return prettier.resolveConfig(fromFile);
-	}
-
-	return Promise.resolve(null);
-}
-
-/**
  * Reformat source code using prettier.
  *
  * @param options Initalization option.
@@ -35,15 +16,15 @@ function resolvePrettierConfig(cwd: string): Promise<object | null> {
  * @return The transformation result.
  */
 export async function reformat(options: Options, source: string, outputOptions?: { sourcemap: boolean }): Promise<{ code: string, map?: SourceMapInput }> {
+	// Since prettier 3.1.1, the resolver searches from a file path, not a directory.
+	// Let's fake it by concatenating with a file name.
+	const prettierConfig = await prettier.resolveConfig(path.join(options.cwd ?? process.cwd()))
+	const { sourcemap, cwd, ...prettierOptions } = options
+	const mergedOptions = { ...prettierConfig, ...prettierOptions }
+	
 	const output = await prettier.format(
 		source,
-		await resolvePrettierConfig(options.cwd ?? process.cwd()).then(resolvedPrettierConfig => {
-			const { sourcemap, cwd, ...prettierOptions } = options
-			const mergedOptions = { ...resolvedPrettierConfig, ...prettierOptions }
-
-			if (Reflect.ownKeys(mergedOptions).length)
-				return mergedOptions
-		})
+		Reflect.ownKeys(mergedOptions).length ? mergedOptions : undefined
 	)
 
 	// Should we generate sourcemap?
