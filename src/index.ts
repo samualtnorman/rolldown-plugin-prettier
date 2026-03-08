@@ -65,12 +65,11 @@ function rollupPluginPrettier(options: Options): Plugin {
 			// Should we generate sourcemap?
 			// The sourcemap option may be a boolean or any truthy value (such as a `string`).
 			// Note that this option should be false by default as it may take a (very) long time.
-			const defaultSourcemap = options.sourcemap ?? false;
-			if (!(outputOptions?.sourcemap ?? defaultSourcemap)) {
+			if (!outputOptions.sourcemap) {
 				return { code: output };
 			}
 
-			if (defaultSourcemap !== 'silent') {
+			if (options.sourcemap != 'silent') {
 				console.warn(`[${NAME}] Sourcemap is enabled, computing diff is required`);
 				console.warn(`[${NAME}] This may take a moment (depends on the size of your bundle)`);
 			}
@@ -78,7 +77,7 @@ function rollupPluginPrettier(options: Options): Plugin {
 			const magicString = new MagicString(source);
 			const changes = diffChars(source, output);
 
-			if (changes && changes.length > 0) {
+			if (changes.length) {
 				let idx = 0;
 
 				changes.forEach((part) => {
