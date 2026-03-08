@@ -35,7 +35,6 @@ function resolvePrettierConfig(cwd: string): Promise<object | null> {
  * @return The transformation result.
  */
 export async function reformat(options: Options, source: string, outputOptions?: { sourcemap: boolean }): Promise<{ code: string, map?: SourceMapInput }> {
-	const sourcemap = outputOptions?.sourcemap
 	const output = await prettier.format(
 		source,
 		await resolvePrettierConfig(options.cwd ?? process.cwd()).then(resolvedPrettierConfig => {
@@ -51,8 +50,7 @@ export async function reformat(options: Options, source: string, outputOptions?:
 	// The sourcemap option may be a boolean or any truthy value (such as a `string`).
 	// Note that this option should be false by default as it may take a (very) long time.
 	const defaultSourcemap = options.sourcemap ?? false;
-	const outputSourcemap = sourcemap == null ? defaultSourcemap : sourcemap;
-	if (!outputSourcemap) {
+	if (!(outputOptions?.sourcemap ?? defaultSourcemap)) {
 		return { code: output };
 	}
 
