@@ -1,8 +1,8 @@
-import * as diff from "diff"
+import { diffChars } from "diff"
 import MagicString from "magic-string"
 import path from "node:path"
 import type { Options as PrettierOptions } from "prettier"
-import prettier from "prettier"
+import * as prettier from "prettier"
 import type { Plugin } from "rolldown"
 
 export const NAME = `rolldown-plugin-prettier`
@@ -76,7 +76,7 @@ function rollupPluginPrettier(options: Options): Plugin {
 			}
 
 			const magicString = new MagicString(source);
-			const changes = diff.diffChars(source, output);
+			const changes = diffChars(source, output);
 
 			if (changes && changes.length > 0) {
 				let idx = 0;
