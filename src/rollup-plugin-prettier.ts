@@ -1,5 +1,4 @@
 import * as diff from "diff"
-import { isEmpty, omitBy } from "es-toolkit/compat"
 import MagicString from "magic-string"
 import path from "node:path"
 import prettier from "prettier"
@@ -7,14 +6,6 @@ import type { SourceMapInput } from "rolldown"
 import type { Options } from "."
 
 export const NAME = `rolldown-plugin-prettier`
-
-/**
- * The plugin options that are currently supported.
- */
-const OPTIONS = new Set([
-	'sourcemap',
-	'cwd',
-]);
 
 /**
  * Resolve prettier config, using `resolveConfig` by default, switch to `resolveConfigSync` otherwise.
@@ -47,16 +38,13 @@ export async function reformat(options: Options, source: string, outputOptions?:
 	const sourcemap = outputOptions?.sourcemap
 	const output = await prettier.format(
 		source,
-		await Promise.all([
-			resolvePrettierConfig(options.cwd ?? process.cwd()),
-			Promise.resolve(
-				omitBy((options), (_value, key) => OPTIONS.has(key)),
-			)
-		]).then((results) => (
-			Object.assign({}, ...results.map((result) => result || {}))
-		)).then((opts) => (
-			isEmpty(opts) ? undefined : opts
-		))
+		await resolvePrettierConfig(options.cwd ?? process.cwd()).then(resolvedPrettierConfig => {
+			const { sourcemap, cwd, ...prettierOptions } = options
+			const mergedOptions = { ...resolvedPrettierConfig, ...prettierOptions }
+
+			if (Reflect.ownKeys(mergedOptions).length)
+				return mergedOptions
+		})
 	)
 
 	// Should we generate sourcemap?
