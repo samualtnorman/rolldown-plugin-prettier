@@ -5,7 +5,7 @@ import type { Options as PrettierOptions } from "prettier"
 import * as prettier from "prettier"
 import type { Plugin } from "rolldown"
 
-export const NAME = `rolldown-plugin-prettier`
+const NAME = `rolldown-plugin-prettier`
 
 export interface Options extends PrettierOptions {
 	/**
