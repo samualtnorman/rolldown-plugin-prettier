@@ -11,15 +11,15 @@ export interface Options extends PrettierOptions {
 	/**
 	 * Directory to look for a Prettier config file.
 	 *
-	 * If omitted, defaults to `process.cwd()`.
+	 * @default process.cwd()
 	 */
 	cwd?: string
 
 	/**
-	 * Whether to generate a sourcemap.
+	 * Silence sourcemap warnings.
 	 *
-	 * Note: This may take some time because rollup-plugin-prettier diffs the
-	 * output to manually generate a sourcemap.
+	 * Doesn't do anything if set to a boolean as Rolldown's own `output.sourcemap` decides if a sourcemap is generated.
+	 * This behaviour matches [`rollup-plugin-prettier`](https://github.com/mjeanroy/rollup-plugin-prettier).
 	 */
 	sourcemap?: boolean | "silent"
 }
