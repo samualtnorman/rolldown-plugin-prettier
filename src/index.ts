@@ -102,4 +102,4 @@ function rollupPluginPrettier(options: Options): Plugin {
 	}
 }
 
-export { rollupPluginPrettier as default }
+export { rollupPluginPrettier as default, rollupPluginPrettier as prettier, rollupPluginPrettier as rolldownPluginPrettier }
