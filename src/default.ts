@@ -24,7 +24,7 @@ export interface Options extends PrettierOptions {
 	sourcemap?: boolean | "silent"
 }
 
-declare namespace rollupPluginPrettier {
+declare namespace rolldownPluginPrettier {
 	export { Options }
 }
 
@@ -34,7 +34,7 @@ declare namespace rollupPluginPrettier {
  * @param options Plugin options.
  * @return Plugin instance.
  */
-const rollupPluginPrettier = (options: Options): Plugin => ({
+const rolldownPluginPrettier = (options: Options): Plugin => ({
 	/**
 	 * Plugin name (used by rollup for error messages and warnings).
 	 * @type {string}
@@ -100,4 +100,4 @@ const rollupPluginPrettier = (options: Options): Plugin => ({
 	}
 })
 
-export { rollupPluginPrettier as default, rollupPluginPrettier as prettier, rollupPluginPrettier as rolldownPluginPrettier }
+export { rolldownPluginPrettier as default, rolldownPluginPrettier as prettier, rolldownPluginPrettier }
