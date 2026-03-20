@@ -1,12 +1,12 @@
-# Samual's Rolldown Plugin Prettier
+# Rolldown Plugin Prettier
 Rollup plugin that can be used to run [Prettier](https://prettier.io/) on the final bundle.
 
 ## Usage
-Add the plugin `npm install --save-dev @samual/rolldown-plugin-prettier`, then add it to your `rolldown.config.js`, for
+Add the plugin `npm install --save-dev rolldown-plugin-prettier`, then add it to your `rolldown.config.js`, for
 example:
 
 ```js
-import prettier from "@samual/rolldown-plugin-prettier"
+import prettier from "rolldown-plugin-prettier"
 // …
 export default {
 	// …
@@ -37,7 +37,7 @@ export default {
 - type: `boolean | 'silent'`
 - example: `prettier({ sourcemap: true })`
 - purpose: Create a sourcemap if the global rollup options don't specify. Set to `"silent"` to avoid
-`@samual/rolldown-plugin-prettier` warning.
+`rolldown-plugin-prettier` warning.
 
 If source map is enabled in the global rollup options, then a source map will be generated on the formatted bundle
 (except if sourcemap are explicitely disabled in the prettier options).
