@@ -27,7 +27,7 @@
 		"diff": "^8",
 		"magic-string": "0.30.21",
 		"prettier": "^3",
-		"rolldown": "1.0.0-rc.6"
+		"rolldown": "1.0.0-rc.10"
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.4",
