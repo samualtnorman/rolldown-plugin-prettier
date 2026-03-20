@@ -29,26 +29,13 @@ declare namespace rolldownPluginPrettier {
 }
 
 /**
- * Create rollup plugin compatible with rollup >= 1.0.0
+ * Create rolldown plugin
  *
  * @param options Plugin options.
  * @return Plugin instance.
  */
 const rolldownPluginPrettier = (options: Options): Plugin => ({
-	/**
-	 * Plugin name (used by rollup for error messages and warnings).
-	 * @type {string}
-	 */
 	name: NAME,
-
-	/**
-	 * Function called by `rollup` before generating final bundle.
-	 *
-	 * @param source Souce code of the final bundle.
-	 * @param _chunkInfo Chunk info.
-	 * @param outputOptions Output option.
-	 * @return The result containing a `code` property and, if a enabled, a `map` property.
-	 */
 	async renderChunk(source, _chunkInfo, outputOptions) {
 		// Since prettier 3.1.1, the resolver searches from a file path, not a directory.
 		// Let's fake it by concatenating with a file name.
