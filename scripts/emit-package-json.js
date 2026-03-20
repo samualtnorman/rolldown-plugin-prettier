@@ -8,5 +8,5 @@ makeDirectorySync("dist", { recursive: true })
 
 writeFileSync(
 	"dist/package.json",
-	JSON.stringify({ ...packageJson, engines, exports: { ".": "./index.js" }, dependencies }, undefined, "\t")
+	JSON.stringify({ ...packageJson, engines, dependencies }, undefined, "\t")
 )
