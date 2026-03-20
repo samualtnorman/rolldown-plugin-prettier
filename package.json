@@ -20,6 +20,9 @@
 		"plugin",
 		"prettier"
 	],
+	"exports": {
+		".": "./default.js"
+	},
 	"dependencies": {
 		"diff": "^8",
 		"magic-string": "0.30.21",
