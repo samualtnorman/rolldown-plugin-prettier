@@ -84,6 +84,9 @@ const rolldownPluginPrettier = (options: Options): Plugin => ({
 				hires: true,
 			}),
 		};
+	},
+	outputOptions() {
+		return { minify: false }
 	}
 })
 
