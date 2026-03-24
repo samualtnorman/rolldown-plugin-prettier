@@ -1,6 +1,6 @@
 {
 	"name": "rolldown-plugin-prettier",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"description": "Rolldown plugin for code formatting using Prettier",
 	"author": "Mickael Jeanroy <mickael.jeanroy@gmail.com>",
 	"contributors": [
