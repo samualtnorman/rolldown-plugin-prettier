@@ -85,8 +85,10 @@ const rolldownPluginPrettier = (options: Options): Plugin => ({
 			}),
 		};
 	},
-	outputOptions() {
-		return { minify: false }
+	outputOptions(options) {
+		options.minify = false
+
+		return options
 	}
 })
 
