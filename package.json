@@ -33,7 +33,7 @@
 		"@eslint/eslintrc": "^3.3.4",
 		"@eslint/js": "^10.0.1",
 		"@samual/assert": "0.0.1-da0fbad",
-		"@samual/rolldown-config": "0.0.1-17fd9d5",
+		"@samual/rolldown-config": "0.0.1-f4d9cd0",
 		"@total-typescript/ts-reset": "^0.6.1",
 		"@types/node": "~20.10",
 		"@types/semver": "^7.7.1",
