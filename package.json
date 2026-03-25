@@ -26,8 +26,15 @@
 	"dependencies": {
 		"diff": "^8",
 		"magic-string": "0.30.21",
-		"prettier": "^3",
+		"prettier": "^3"
+	},
+	"peerDependencies": {
 		"rolldown": "1.0.0-rc.11"
+	},
+	"peerDependenciesMeta": {
+		"rolldown": {
+			"optional": true
+		}
 	},
 	"devDependencies": {
 		"@eslint/eslintrc": "^3.3.4",
